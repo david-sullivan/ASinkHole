@@ -1,0 +1,104 @@
+[gd_scene load_steps=13 format=3 uid="uid://cqi87vo652kmq"]
+
+[ext_resource type="Script" path="res://Enemy/enemy.gd" id="1_gkwja"]
+[ext_resource type="Texture2D" uid="uid://ds1tpgruye8n3" path="res://Art/PNG/sprites/frog/idle/frog-idle-1.png" id="1_q2omj"]
+[ext_resource type="Texture2D" uid="uid://sa144n6b130k" path="res://Art/PNG/sprites/frog/idle/frog-idle-2.png" id="2_0r2om"]
+[ext_resource type="Texture2D" uid="uid://cf8rf6kfd57aw" path="res://Art/PNG/sprites/frog/idle/frog-idle-3.png" id="3_yjsjw"]
+[ext_resource type="Texture2D" uid="uid://2v23ymclk87q" path="res://Art/PNG/sprites/frog/idle/frog-idle-4.png" id="4_eq2ci"]
+[ext_resource type="Texture2D" uid="uid://d01bg1a7qs7hl" path="res://Art/PNG/sprites/frog/jump/frog-jump-1.png" id="5_owfgc"]
+[ext_resource type="Texture2D" uid="uid://wngyyeqmxwer" path="res://Art/PNG/sprites/frog/jump/frog-jump-2.png" id="6_l3djj"]
+[ext_resource type="AudioStream" uid="uid://bulmr2lpb7y4h" path="res://Sound/sound_explode.wav" id="8_c767p"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_crgks"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_q2omj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_0r2om")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_yjsjw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_eq2ci")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_owfgc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_l3djj")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 3.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e1bl7"]
+height = 24.0
+
+[sub_resource type="Curve" id="Curve_wiuvw"]
+max_value = 170.38
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 10), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_pvyi2"]
+offsets = PackedFloat32Array(0, 0.215859, 0.762115, 0.991189)
+colors = PackedColorArray(0.117647, 0.443137, 0.6, 1, 0.513726, 0.588235, 0, 0.87451, 0.819608, 0, 0.819608, 0.494118, 0, 0, 0, 0)
+
+[node name="Enemy" type="RigidBody2D"]
+collision_layer = 2
+max_contacts_reported = 1
+contact_monitor = true
+script = ExtResource("1_gkwja")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_crgks")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+rotation = 1.5708
+scale = Vector2(2, 2)
+shape = SubResource("CapsuleShape2D_e1bl7")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_c767p")
+volume_db = 16.727
+
+[node name="ParticleDeathExplosion" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 20
+one_shot = true
+emission_shape = 3
+emission_rect_extents = Vector2(50, 50)
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 1)
+initial_velocity_max = 1.0
+angular_velocity_min = -105.11
+angular_velocity_max = 63.07
+radial_accel_min = 10.0
+radial_accel_max = 20.0
+angle_min = -720.0
+angle_max = 720.0
+scale_amount_min = 5.0
+scale_amount_max = 10.0
+scale_amount_curve = SubResource("Curve_wiuvw")
+color_ramp = SubResource("Gradient_pvyi2")
+hue_variation_min = -0.15
+hue_variation_max = 0.12
+
+[node name="TimerExplosion" type="Timer" parent="ParticleDeathExplosion"]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

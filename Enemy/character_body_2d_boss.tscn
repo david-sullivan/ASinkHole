@@ -1,0 +1,67 @@
+[gd_scene load_steps=6 format=3 uid="uid://dvkjv03rx1qks"]
+
+[ext_resource type="Script" path="res://Enemy/character_body_2d_boss.gd" id="1_pyv1r"]
+[ext_resource type="Texture2D" uid="uid://dssin2ffwxjr7" path="res://Art/PNG/sprites/opossum/opossum-2.png" id="2_46q3s"]
+
+[sub_resource type="Curve" id="Curve_qhrtb"]
+max_value = 170.38
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 10), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_lh5ji"]
+offsets = PackedFloat32Array(0, 0.215859, 0.762115, 0.991189)
+colors = PackedColorArray(0.117647, 0.443137, 0.6, 1, 0.513726, 0.588235, 0, 0.87451, 0.819608, 0, 0.819608, 0.494118, 0, 0, 0, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tsy8o"]
+size = Vector2(111, 85)
+
+[node name="CB2d_Boss" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_pyv1r")
+
+[node name="ParticleDeathExplosion" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 20
+one_shot = true
+emission_shape = 3
+emission_rect_extents = Vector2(50, 50)
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 1)
+initial_velocity_max = 1.0
+angular_velocity_min = -105.11
+angular_velocity_max = 63.07
+radial_accel_min = 10.0
+radial_accel_max = 20.0
+angle_min = -720.0
+angle_max = 720.0
+scale_amount_min = 5.0
+scale_amount_max = 10.0
+scale_amount_curve = SubResource("Curve_qhrtb")
+color_ramp = SubResource("Gradient_lh5ji")
+hue_variation_min = -0.15
+hue_variation_max = 0.12
+
+[node name="TimerExplosion" type="Timer" parent="ParticleDeathExplosion"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("2_46q3s")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(-64, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-8.5, 11.5)
+shape = SubResource("RectangleShape2D_tsy8o")
+metadata/_edit_lock_ = true
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(-18, 10)
+target_position = Vector2(-212, 0)
+
+[node name="TimerLunge" type="Timer" parent="."]
+
+[connection signal="timeout" from="ParticleDeathExplosion/TimerExplosion" to="." method="_on_timer_explosion_timeout"]
+[connection signal="timeout" from="TimerLunge" to="." method="_on_timer_lunge_timeout"]

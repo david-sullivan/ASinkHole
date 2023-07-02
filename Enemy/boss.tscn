@@ -1,0 +1,71 @@
+[gd_scene load_steps=11 format=3 uid="uid://tdmd1ifhwqdj"]
+
+[ext_resource type="Script" path="res://Enemy/boss.gd" id="1_yympm"]
+[ext_resource type="Texture2D" uid="uid://ds1tpgruye8n3" path="res://Art/PNG/sprites/frog/idle/frog-idle-1.png" id="2_ekdi5"]
+[ext_resource type="Texture2D" uid="uid://sa144n6b130k" path="res://Art/PNG/sprites/frog/idle/frog-idle-2.png" id="3_03jfe"]
+[ext_resource type="Texture2D" uid="uid://cf8rf6kfd57aw" path="res://Art/PNG/sprites/frog/idle/frog-idle-3.png" id="4_lkm0w"]
+[ext_resource type="Texture2D" uid="uid://2v23ymclk87q" path="res://Art/PNG/sprites/frog/idle/frog-idle-4.png" id="5_2j3o6"]
+[ext_resource type="Texture2D" uid="uid://d01bg1a7qs7hl" path="res://Art/PNG/sprites/frog/jump/frog-jump-1.png" id="6_62rjp"]
+[ext_resource type="Texture2D" uid="uid://wngyyeqmxwer" path="res://Art/PNG/sprites/frog/jump/frog-jump-2.png" id="7_asjgj"]
+[ext_resource type="AudioStream" uid="uid://bulmr2lpb7y4h" path="res://Sound/sound_explode.wav" id="8_apslp"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_crgks"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ekdi5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_03jfe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_lkm0w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_2j3o6")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_62rjp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_asjgj")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 3.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e1bl7"]
+height = 24.0
+
+[node name="Boss" type="RigidBody2D"]
+collision_layer = 2
+collision_mask = 5
+max_contacts_reported = 1
+contact_monitor = true
+script = ExtResource("1_yympm")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_crgks")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+rotation = 1.5708
+scale = Vector2(4, 4)
+shape = SubResource("CapsuleShape2D_e1bl7")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_apslp")
+volume_db = 16.727
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

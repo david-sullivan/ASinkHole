@@ -1,0 +1,11 @@
+res://Art/coin/coin.tscn::3fceaa484c6a65bb5242c027701149f1::1685978724::res://.godot/exported/133200997/export-c745a4bab133e7cc48ed52be16705ec0-coin.scn
+res://Collectible/coin.tscn::7dc6aba01375e94ec869b4d6fb2b207f::1687379317::res://.godot/exported/133200997/export-d91d14bcfce214348a88f568e575a8f0-coin.scn
+res://Enemy/enemy.tscn::bc8cb8aeac8be98f0e9207e66a8e6ae1::1687379317::res://.godot/exported/133200997/export-fd710a71c2d2ebe52136e62dc9922fbe-enemy.scn
+res://Platform/platform.tscn::2d92a2385dcde250ff9ad79f7f20a185::1686688330::res://.godot/exported/133200997/export-b40f21cfcd5de45955cca29c9324393f-platform.scn
+res://Platform/platform_moving.tscn::b7edd21b06d85aa337b5e6958c04c70a::1687379317::res://.godot/exported/133200997/export-d78887e5884f438792a927e057516f7f-platform_moving.scn
+res://Player/player.tscn::4ba84efede109cef6cb3460407bdc860::1686513066::res://.godot/exported/133200997/export-d267b47f7e81a3258979164d56d0d9c2-player.scn
+res://Player/player_rb.tscn::10f4a902a82ba46a5f57de2df840af6a::1687379317::res://.godot/exported/133200997/export-dcbdda541cd29b754f86887c010183a0-player_rb.scn
+res://UI/hud.tscn::d20bf5b81894bf79dc5e5d67480bf4d7::1687379317::res://.godot/exported/133200997/export-a95b3dfddf44e866791e8c8563580609-hud.scn
+res://gator.tscn::c1103eb8e136416cb905c4225ce3dfd7::1686524397::res://.godot/exported/133200997/export-6653048b630e195738cb48480fbcee89-gator.scn
+res://main.tscn::d172aafb137152c71b2568ab46fac820::1687379317::res://.godot/exported/133200997/export-3070c538c03ee49b7677ff960a3f5195-main.scn
+res://CityTileset.tres::b3a72f04e3e84a24c0d9de4ab1356b52::1687379317::res://.godot/exported/133200997/export-bced48d1a2ef0b01e9a1ba5b345cb100-CityTileset.res

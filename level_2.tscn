@@ -1,0 +1,59 @@
+[gd_scene load_steps=4 format=3 uid="uid://btli368e4oqgu"]
+
+[ext_resource type="Script" path="res://level_2.gd" id="1_148ye"]
+[ext_resource type="Texture2D" uid="uid://du4grg5k6j80f" path="res://icon.svg" id="2_64ylm"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ot25l"]
+font_size = 32
+
+[node name="level2" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_148ye")
+
+[node name="health" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "health"
+label_settings = SubResource("LabelSettings_ot25l")
+
+[node name="coins" type="Label" parent="."]
+layout_mode = 0
+offset_left = 379.0
+offset_top = 235.0
+offset_right = 419.0
+offset_bottom = 258.0
+text = "coins"
+
+[node name="powerup" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 183.0
+offset_top = -430.0
+offset_right = 232.0
+offset_bottom = -404.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "power"
+
+[node name="player" type="Sprite2D" parent="."]
+position = Vector2(973, 495)
+texture = ExtResource("2_64ylm")

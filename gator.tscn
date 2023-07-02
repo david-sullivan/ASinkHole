@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://b6kym43f21iwp"]
+
+[ext_resource type="Texture2D" uid="uid://lo3ojc6xmjbc" path="res://Art/gator.png" id="1_vtxyt"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y5qpp"]
+radius = 9.0
+height = 98.0
+
+[node name="Gator" type="RigidBody2D"]
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("1_vtxyt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+scale = Vector2(2, 2)
+shape = SubResource("CapsuleShape2D_y5qpp")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
